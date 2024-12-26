@@ -15,11 +15,13 @@
             <p:inputText value="#{personaBean.persona.nombres}"/>
             <p:outputLabel value="Apellidos"/>
             <p:inputText value="#{personaBean.persona.apellidos}"/>
-            
+            <p:outputLabel value="Numero de celular"/>
+            <p:inputText value="#{personaBean.persona.numCelular}"/>
+
             <p:outputLabel value="Sexo"/>
             <p:selectOneMenu value="#{personaBean.persona.sexo}">
-                <f:selectItem value="Masculino" itemValue="M"/>
-                <f:selectItem value="Femenino" itemValue="F"/>
+                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                <f:selectItem itemLabel="Femenino" itemValue="F"/>
             </p:selectOneMenu>
         </h:form>
     </h:body>
