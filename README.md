@@ -9,4 +9,4 @@ Capturas de la DB y configuración del servidor, etc..
 ![image](https://github.com/user-attachments/assets/6e2bbafc-83c7-4649-a2c0-ba399d9e8ad3)
 ![image](https://github.com/user-attachments/assets/85aa6f09-6d1b-4459-870d-d80691777d46)
 ![image](https://github.com/user-attachments/assets/07f0bd3d-b595-4b83-853d-e93f10f8e840)
-![image](https://github.com/user-attachments/assets/0fe92338-5aaa-44b6-9dfd-7add79e60b16)
+![image](https://github.com/user-attachments/assets/79c6410c-56c5-4fd1-be51-c2059e38759f)
