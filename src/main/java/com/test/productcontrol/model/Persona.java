@@ -10,17 +10,17 @@ package com.test.productcontrol.model;
  */
 public class Persona {
     private int id;
-    private int numDocumento;
+    private long numDocumento;
     private String nombres;
     private String apellidos;
     private String sexo;
-    private int numCelular;
+    private long numCelular;
 
     public int getId() {
         return id;
     }
     
-    public int getNumDocumento() {
+    public long getNumDocumento() {
         return numDocumento;
     }
     
@@ -33,10 +33,10 @@ public class Persona {
     }
 
     public String getSexo() {
-        return sexo;
-    }
+        return sexo;     
+   }
     
-    public int getNumCelular() {
+    public long getNumCelular() {
         return numCelular;
     }
 
@@ -44,7 +44,7 @@ public class Persona {
         this.id = id;
     }
 
-    public void setNumDocumento(int numDocumento) {
+    public void setNumDocumento(long numDocumento) {
         this.numDocumento = numDocumento;
     }
 
@@ -60,7 +60,7 @@ public class Persona {
         this.sexo = sexo;
     }
 
-    public void setNumCelular(int numCelular) {
+    public void setNumCelular(long numCelular) {
         this.numCelular = numCelular;
     }
     

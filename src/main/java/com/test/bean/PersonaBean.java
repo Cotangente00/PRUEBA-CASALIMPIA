@@ -6,6 +6,7 @@ package com.test.bean;
 
 import com.test.productcontrol.PersonaRegister;
 import com.test.productcontrol.model.Persona;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 /**
@@ -17,6 +18,15 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class PersonaBean {
     private Persona persona = new Persona();
+    private List<Persona> lstPersonas;
+
+    public List<Persona> getLstPersonas() {
+        return lstPersonas;
+    }
+
+    public void setLstPersonas(List<Persona> lstPersonas) {
+        this.lstPersonas = lstPersonas;
+    }
 
     public Persona getPersona() {
         return persona;
@@ -26,11 +36,38 @@ public class PersonaBean {
         this.persona = persona;
     }
     
-    public void registrar(){
-        PersonaRegister register;
+    public void registrar()throws Exception{
+        PersonaRegister registro;
         
         try{
+            registro = new PersonaRegister();
+            registro.register(persona);
+        }catch (Exception e){
+            throw e;
+        }
+    }
+    
+    public void listar()throws Exception{
+        PersonaRegister registro;
+        
+        try{
+            registro = new PersonaRegister();
+            lstPersonas = registro.listar();
+        }catch (Exception e){
+            throw e;
+        }
+    }
+    
+    public void readID(Persona per) throws Exception{
+        PersonaRegister registro;
+        Persona temp;
+        try{
+            registro = new PersonaRegister();
+            temp = registro.readID(per);
             
+            if (temp != null){
+                this.persona = temp;
+            }
         }catch (Exception e){
             throw e;
         }
