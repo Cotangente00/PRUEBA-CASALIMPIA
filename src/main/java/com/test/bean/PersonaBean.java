@@ -8,14 +8,15 @@ import com.test.productcontrol.PersonaRegister;
 import com.test.productcontrol.model.Persona;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+
 /**
  *
  * @author user
  */
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class PersonaBean {
     private Persona persona = new Persona();
     private List<Persona> lstPersonas;

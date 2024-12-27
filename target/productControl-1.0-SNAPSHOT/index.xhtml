@@ -12,11 +12,11 @@
         <p:growl id="msj" showDetail="true"/>
         <h:form>
             <p:outputLabel for="numDocumento" value="Número de Documento"/>
-            <p:inputText id="numDocumento" value="#{personaBean.persona.numDocumento}" required="true"/>
+            <p:inputText id="numDocumento" value="#{personaBean.persona.numDocumento}"/>
             <p:outputLabel value="Nombres"/>
             <p:inputText value="#{personaBean.persona.nombres}"/>
             <p:outputLabel value="Apellidos"/>
-            <p:inputText value="#{personaBean.persona.apellidos}"/>
+            <p:inputText value="#{personaBean.persona.apellidos}"/> 
             <p:outputLabel value="Número de celular"/>
             <p:inputText value="#{personaBean.persona.numCelular}"/>
             
@@ -57,10 +57,32 @@
                     <p:outputLabel value="#{persona.numCelular}"/>
                 </p:column>
                 
-                <p:column headerText="Editar">
-                    <p:commandLink value="Modificar"/>
+                <p:column headerText="Modificar">
+                    <p:commandLink value="Modificar" actionListener="#{personaBean.readID(persona)}" oncomplete="PF('wdlgDatos').show();" update=":dlgDatos"/>
                 </p:column>
             </p:dataTable>
         </h:form>
+        
+        <p:dialog header="Datos" widgetVar="wdlgDatos" id="dlgDatos">
+            <h:form>
+                <p:outputLabel value="Número de Documento"/>
+                <p:inputText value="#{personaBean.persona.numDocumento}"/>
+                <p:outputLabel value="Nombres"/>
+                <p:inputText value="#{personaBean.persona.nombres}"/>
+                <p:outputLabel value="Apellidos"/>
+                <p:inputText value="#{personaBean.persona.apellidos}"/>
+                <p:outputLabel value="Número de celular"/>
+                <p:inputText value="#{personaBean.persona.numCelular}"/>
+
+                <p:outputLabel value="Sexo"/>
+                <p:selectOneMenu value="#{personaBean.persona.sexo}">
+                    <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                    <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                </p:selectOneMenu>
+
+                <p:commandButton value="Modificar"/>
+                <p:commandButton value="Cancelar" />
+            </h:form>
+        </p:dialog>
     </h:body>
 </html>
