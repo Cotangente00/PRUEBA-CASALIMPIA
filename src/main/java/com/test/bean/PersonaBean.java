@@ -27,6 +27,7 @@ public class PersonaBean {
     }
 
     public void setAccion(String accion) {
+        this.limpiar();
         this.accion = accion;
     }
     
@@ -47,12 +48,46 @@ public class PersonaBean {
         this.persona = persona;
     }
     
-    public void registrar()throws Exception{
+    public void operar () throws Exception{
+        switch(accion){
+            case "Registrar":
+                this.registrar();
+                this.limpiar();
+                break;
+            case "Modificar":
+                this.modificar();
+                this.limpiar();
+                break;
+        }
+    }
+    
+    public void limpiar(){
+        this.persona.setId(0);
+        this.persona.setNombres("");
+        this.persona.setApellidos("");
+        this.persona.setSexo("");
+        this.persona.setNumCelular(0);
+    }
+    
+    private void registrar()throws Exception{
         PersonaRegister registro;
         
         try{
             registro = new PersonaRegister();
             registro.register(persona);
+            this.listar();
+        }catch (Exception e){
+            throw e;
+        }
+    }
+    
+    private void modificar()throws Exception{
+        PersonaRegister registro;
+        
+        try{
+            registro = new PersonaRegister();
+            registro.modificar(persona);
+            this.listar();
         }catch (Exception e){
             throw e;
         }
@@ -78,19 +113,8 @@ public class PersonaBean {
             
             if (temp != null){
                 this.persona = temp;
+                this.accion = "Modificar";
             }
-        }catch (Exception e){
-            throw e;
-        }
-    } 
-    
-    public void modificar()throws Exception{
-        PersonaRegister registro;
-        
-        try{
-            registro = new PersonaRegister();
-            registro.modificar(persona);
-            this.listar();
         }catch (Exception e){
             throw e;
         }
