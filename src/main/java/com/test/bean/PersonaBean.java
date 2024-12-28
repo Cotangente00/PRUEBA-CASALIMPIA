@@ -20,6 +20,16 @@ import javax.faces.bean.ViewScoped;
 public class PersonaBean {
     private Persona persona = new Persona();
     private List<Persona> lstPersonas;
+    private String accion;
+
+    public String getAccion() {
+        return accion;
+    }
+
+    public void setAccion(String accion) {
+        this.accion = accion;
+    }
+    
 
     public List<Persona> getLstPersonas() {
         return lstPersonas;
@@ -72,5 +82,30 @@ public class PersonaBean {
         }catch (Exception e){
             throw e;
         }
+    } 
+    
+    public void modificar()throws Exception{
+        PersonaRegister registro;
+        
+        try{
+            registro = new PersonaRegister();
+            registro.modificar(persona);
+            this.listar();
+        }catch (Exception e){
+            throw e;
+        }
     }
+    
+    public void eliminar(Persona per)throws Exception{
+        PersonaRegister registro;
+        
+        try{
+            registro = new PersonaRegister();
+            registro.eliminar(per);
+            this.listar();
+        }catch (Exception e){
+            throw e;
+        }
+    }
+    
 }

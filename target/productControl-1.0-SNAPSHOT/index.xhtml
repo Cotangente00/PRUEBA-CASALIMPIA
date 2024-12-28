@@ -10,7 +10,7 @@
     <h:body>
         
         <p:growl id="msj" showDetail="true"/>
-        <h:form>
+        <h:form id="frm">
             <p:outputLabel for="numDocumento" value="Número de Documento"/>
             <p:inputText id="numDocumento" value="#{personaBean.persona.numDocumento}"/>
             <p:outputLabel value="Nombres"/>
@@ -27,7 +27,9 @@
                 <f:selectItem itemLabel="Femenino" itemValue="F"/>
             </p:selectOneMenu>
             
-            <p:commandButton value="Registrar" actionListener="#{personaBean.registrar()}"/>
+            
+            <p:commandButton value="Nuevo" oncomplete="PF('wdlgDatos').show();"/>
+            <p:commandButton value="Registrar" actionListener="#{personaBean.registrar()}" update="data"/>
             <p:commandButton value="Listar" actionListener="#{personaBean.listar()}" update="data"/>
             
             <p:dataTable id="data" value="#{personaBean.lstPersonas}" var="persona">
@@ -57,8 +59,12 @@
                     <p:outputLabel value="#{persona.numCelular}"/>
                 </p:column>
                 
-                <p:column headerText="Modificar">
+                <p:column headerText="Editar">
                     <p:commandLink value="Modificar" actionListener="#{personaBean.readID(persona)}" oncomplete="PF('wdlgDatos').show();" update=":dlgDatos"/>
+                </p:column>
+                
+                <p:column headerText="Eliminar">
+                    <p:commandLink value="Eliminar" actionListener="#{personaBean.eliminar(persona)}" update="data"/>
                 </p:column>
             </p:dataTable>
         </h:form>
@@ -80,8 +86,8 @@
                     <f:selectItem itemLabel="Femenino" itemValue="F"/>
                 </p:selectOneMenu>
 
-                <p:commandButton value="Modificar"/>
-                <p:commandButton value="Cancelar" />
+                <p:commandButton value="#{personaBean.accion}" actionListener="#{personaBean.modificar()}" oncomplete="PF('wdlgDatos').hide();" update=":frm:data"/>
+                <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('wdlgDatos').hide();"/>
             </h:form>
         </p:dialog>
     </h:body>

@@ -82,4 +82,36 @@ public class PersonaRegister extends connection{
         }
         return pers;
     }
+    
+    public void modificar (Persona per) throws Exception{
+        try{
+            this.connect();
+            PreparedStatement st =  this.getCn().prepareStatement("UPDATE Persona SET numDocumento = ?, nombres = ?, apellidos = ?, sexo = ?, numCelular = ? WHERE id = ?");
+            st.setLong(1, per.getNumDocumento());
+            st.setString(2, per.getNombres());
+            st.setString(3, per.getApellidos());
+            st.setString(4, per.getSexo());
+            st.setLong(5, per.getNumCelular());
+            st.setInt(6, per.getId());
+            st.executeUpdate();
+        }catch (Exception e){
+            throw e;
+        }finally{
+            this.close();
+        }
+    }
+    
+    public void eliminar (Persona per) throws Exception{
+        try{
+            this.connect();
+            PreparedStatement st =  this.getCn().prepareStatement("DELETE FROM Persona WHERE id = ?");
+            st.setInt(1, per.getId());
+            st.executeUpdate();
+        }catch (Exception e){
+            throw e;
+        }finally{
+            this.close();
+        }
+    }
+    
 }
