@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/templates/plantilla.xhtml">
+
+            <ui:define name="content">
+                
+                <p:growl id="msj" showDetail="true"/>
+                    <h:form id="frm">
+
+                        <p:commandButton value="Nuevo" oncomplete="PF('wdlgDatos').show();" actionListener="#{personaBean.setAccion('Registrar')}" update=":dlgDatos"/>
+                        <p:commandButton value="Listar" actionListener="#{personaBean.listar()}" update="data"/>
+
+                        <p:dataTable id="data" value="#{personaBean.lstPersonas}" var="persona">
+                            <p:column headerText="ID">
+                                <p:outputLabel value="#{persona.id}"/>
+                            </p:column>
+
+                            <p:column headerText="Número de documento">
+                                <p:outputLabel value="#{persona.numDocumento}"/>
+                            </p:column>
+
+                            <p:column headerText="Nombres">
+                                <p:outputLabel value="#{persona.nombres}"/>
+                            </p:column>
+
+                            <p:column headerText="Apellidos">
+                                <p:outputLabel value="#{persona.apellidos}"/>
+                            </p:column>
+
+                            <p:column headerText="Sexo">
+                                <p:outputLabel value="#{persona.sexo}">
+                                    <f:converter converterId="sexoConverter" />
+                                </p:outputLabel>
+                            </p:column>
+
+                            <p:column headerText="Número de celular">
+                                <p:outputLabel value="#{persona.numCelular}"/>
+                            </p:column>
+
+                            <p:column headerText="Editar">
+                                <p:commandLink value="Modificar" actionListener="#{personaBean.readID(persona)}" oncomplete="PF('wdlgDatos').show();" update=":dlgDatos"/>
+                            </p:column>
+
+                            <p:column headerText="Eliminar">
+                                <p:commandLink value="Eliminar" actionListener="#{personaBean.eliminar(persona)}" update="data"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                    <p:dialog header="Datos" widgetVar="wdlgDatos" id="dlgDatos">
+                        <h:form>
+                            <p:outputLabel value="Número de Documento"/>
+                            <p:inputText value="#{personaBean.persona.numDocumento}"/>
+                            <p:outputLabel value="Nombres"/>
+                            <p:inputText value="#{personaBean.persona.nombres}"/>
+                            <p:outputLabel value="Apellidos"/>
+                            <p:inputText value="#{personaBean.persona.apellidos}"/>
+                            <p:outputLabel value="Número de celular"/>
+                            <p:inputText value="#{personaBean.persona.numCelular}"/>
+
+                            <p:outputLabel value="Sexo"/>
+                            <p:selectOneMenu value="#{personaBean.persona.sexo}">
+                                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                            </p:selectOneMenu>
+
+                            <p:commandButton value="#{personaBean.accion}" actionListener="#{personaBean.operar()}" oncomplete="PF('wdlgDatos').hide();" update=":frm:data"/>
+                            <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('wdlgDatos').hide();"/>
+                        </h:form>
+                    </p:dialog>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
