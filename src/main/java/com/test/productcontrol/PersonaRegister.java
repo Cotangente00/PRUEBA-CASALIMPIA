@@ -63,8 +63,8 @@ public class PersonaRegister extends connection{
         ResultSet rs;
         try{
             this.connect();
-            PreparedStatement st =  this.getCn().prepareStatement("SELECT id, numDocumento, nombres, apellidos, sexo, numCelular WHERE numDocumento = ?");
-            st.setLong(1, per.getNumDocumento());
+            PreparedStatement st =  this.getCn().prepareStatement("SELECT id, numDocumento, nombres, apellidos, sexo, numCelular FROM Persona WHERE id = ?");
+            st.setInt(1, per.getId());
             rs = st.executeQuery();
             while (rs.next()){
                 pers = new Persona();

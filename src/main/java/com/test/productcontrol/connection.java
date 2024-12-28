@@ -26,7 +26,7 @@ public class connection {
     public void connect() throws Exception{
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/crud_jsf_jpf?user=Cotangente00&password=Camil0242003.");
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/crud_jsf_jpf?user=Cotangente&password=Camil0242003.");
         }catch(Exception e){
             throw e;
         }
