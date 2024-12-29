@@ -9,6 +9,7 @@ import com.test.productcontrol.model.Persona;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -48,6 +49,12 @@ public class PersonaBean {
         this.persona = persona;
     }
     
+    private boolean isPostBack (){
+        boolean reply;
+        reply = FacesContext.getCurrentInstance().isPostback();
+        return reply;
+    }
+    
     public void operar () throws Exception{
         switch(accion){
             case "Registrar":
@@ -75,7 +82,7 @@ public class PersonaBean {
         try{
             registro = new PersonaRegister();
             registro.register(persona);
-            this.listar();
+            this.listar("V");
         }catch (Exception e){
             throw e;
         }
@@ -87,18 +94,26 @@ public class PersonaBean {
         try{
             registro = new PersonaRegister();
             registro.modificar(persona);
-            this.listar();
+            this.listar("V");
         }catch (Exception e){
             throw e;
         }
     }
     
-    public void listar()throws Exception{
+    public void listar(String valor)throws Exception{
         PersonaRegister registro;
         
         try{
-            registro = new PersonaRegister();
-            lstPersonas = registro.listar();
+            if(valor.contains("F")){
+                if(isPostBack() == false){
+                    registro = new PersonaRegister();
+                    lstPersonas = registro.listar();
+                }   
+            } else {
+                registro = new PersonaRegister();
+                lstPersonas = registro.listar();
+            }
+            
         }catch (Exception e){
             throw e;
         }
@@ -126,7 +141,7 @@ public class PersonaBean {
         try{
             registro = new PersonaRegister();
             registro.eliminar(per);
-            this.listar();
+            this.listar("V");
         }catch (Exception e){
             throw e;
         }

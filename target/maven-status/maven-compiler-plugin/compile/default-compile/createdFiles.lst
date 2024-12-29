@@ -1,6 +1,8 @@
+com\test\bean\ProductoBean.class
 com\test\productcontrol\model\Persona.class
 com\test\productcontrol\model\DetalleVenta.class
 com\test\productcontrol\model\Venta.class
+com\test\productcontrol\ProductoRegister.class
 com\test\converter\SexoConverter.class
 com\test\productcontrol\PersonaRegister.class
 com\test\bean\PersonaBean.class

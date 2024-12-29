@@ -8,7 +8,7 @@ package com.test.productcontrol.model;
  *
  * @author user
  */
-class Producto {
+public class Producto {
     private int id;
     private String nombre;
     private double precio;
