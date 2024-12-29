@@ -1,5 +1,6 @@
 com\test\bean\ProductoBean.class
 com\test\productcontrol\model\Persona.class
+com\test\productcontrol\VentaRegister.class
 com\test\productcontrol\model\DetalleVenta.class
 com\test\productcontrol\model\Venta.class
 com\test\productcontrol\ProductoRegister.class

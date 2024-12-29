@@ -13,6 +13,8 @@
             <ui:define name="content">
                 <f:event type="preRenderView" listener="#{personaBean.listar('F')}" />
                 <f:event type="preRenderView" listener="#{productoBean.listar('F')}" />
+                
+                <p:growl id="msj" autoUpdate="true" showDetail="true"/>
                 <h:form>
                     <p:outputLabel value="Persona"/>
                     <p:selectOneMenu value="#{ventaBean.venta.persona}" converter="omnifaces.SelectItemsConverter">
@@ -41,14 +43,16 @@
                         </p:column>
                         
                         <p:column headerText="Precio">
-                            #{det.idProducto.precio}
+                            <p:outputLabel value="#{det.idProducto.precio}">
+                                <f:convertNumber type="currency" currencySymbol="$/. " minFractionDigits="2"/>
+                            </p:outputLabel>
                         </p:column>
                         
                         <p:column headerText="Cantidad">
                             #{det.cantidad}
                         </p:column>
                     </p:dataTable>
-                    <p:commandButton value="Agregar"/>
+                    <p:commandButton value="Registrar" actionListener="#{ventaBean.registrar()}" action="ventas?faces-redirect=true"/>
                 </h:form>
             </ui:define>
 

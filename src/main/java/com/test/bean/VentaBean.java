@@ -4,13 +4,16 @@
  */
 package com.test.bean;
 
+import com.test.productcontrol.VentaRegister;
 import com.test.productcontrol.model.DetalleVenta;
 import com.test.productcontrol.model.Producto;
 import com.test.productcontrol.model.Venta;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -62,5 +65,25 @@ public class VentaBean {
         det.setCantidad(cantidad);
         det.setIdProducto(producto);
         this.lista.add(det);
+    }
+    
+    public void registrar() throws Exception{
+        VentaRegister registro;
+        double monto = 0;
+        
+        try{
+            
+            for(DetalleVenta det: lista){
+                monto += det.getIdProducto().getPrecio();
+            }
+            
+            registro = new VentaRegister();
+            venta.setMonto(monto);
+            registro.register(venta, lista);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Éxito. Venta registrada correctamente."));
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error! La venta no ha sido registrada."));
+            throw e;
+        }
     }
 }
