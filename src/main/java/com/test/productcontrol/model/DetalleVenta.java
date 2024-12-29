@@ -10,8 +10,41 @@ package com.test.productcontrol.model;
  */
 public class DetalleVenta {
     private int id;
-    private int idVenta;
-    private int idProducto;
+    private Venta idVenta;
+    private Producto idProducto;
     private int cantidad;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Venta getIdVenta() {
+        return idVenta;
+    }
+
+    public void setIdVenta(Venta idVenta) {
+        this.idVenta = idVenta;
+    }
+
+    public Producto getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(Producto idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
     
 }

@@ -7,4 +7,5 @@ com\test\converter\SexoConverter.class
 com\test\productcontrol\PersonaRegister.class
 com\test\bean\PersonaBean.class
 com\test\productcontrol\model\Producto.class
+com\test\bean\VentaBean.class
 com\test\productcontrol\connection.class

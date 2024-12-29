@@ -16,6 +16,33 @@ public class Persona {
     private String sexo;
     private long numCelular;
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Persona other = (Persona) obj;
+        return this.id == other.id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s[id=%d]", getClass().getSimpleName(), getId());
+    }
+    
     public int getId() {
         return id;
     }

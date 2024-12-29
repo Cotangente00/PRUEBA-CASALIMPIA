@@ -13,6 +13,35 @@ public class Producto {
     private String nombre;
     private double precio;
 
+    @Override
+    public String toString() {
+        return String.format("%s[id=%d]", getClass().getSimpleName(), getId());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 17 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Producto other = (Producto) obj;
+        return this.id == other.id;
+    }
+
+    
+    
     public int getId() {
         return id;
     }
