@@ -70,11 +70,10 @@ public class VentaBean {
     public void registrar() throws Exception{
         VentaRegister registro;
         double monto = 0;
-        
         try{
             
             for(DetalleVenta det: lista){
-                monto += det.getIdProducto().getPrecio();
+                monto += det.getIdProducto().getPrecio() * det.getCantidad();
             }
             
             registro = new VentaRegister();
