@@ -80,10 +80,12 @@ public class VentaBean {
             registro = new VentaRegister();
             venta.setMonto(monto);
             registro.register(venta, lista);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Éxito. Venta registrada correctamente."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Exito. Venta registrada correctamente."));
         }catch(Exception e){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error! La venta no ha sido registrada."));
             throw e;
+        } finally {
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         }
     }
 }
