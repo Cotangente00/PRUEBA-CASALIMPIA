@@ -12,42 +12,79 @@
 
             <ui:define name="content">
                 <f:event type="preRenderView" listener="#{ventaBean.listar('F')}" />
-                <p:dataTable id="data" value="#{ventaBean.lstVentas}" var="venta">
-                    <p:column headerText="ID-Venta">
-                        <p:outputLabel value="#{venta.id}"/>
-                    </p:column>
+                <h:form id="form">
+                    <p:dataTable id="data" value="#{ventaBean.lstVentas}" var="venta">
+                        <p:column headerText="ID-Venta">
+                            <p:outputLabel value="#{venta.id}"/>
+                        </p:column>
 
-                    <p:column headerText="Fecha">
-                        <p:outputLabel value="#{venta.fecha}"/>
-                    </p:column>
+                        <p:column headerText="Fecha">
+                            <p:outputLabel value="#{venta.fecha}"/>
+                        </p:column>
 
-                    <p:column headerText="Número documento">
-                        <p:outputLabel value="#{venta.numDocumentoPersona}"/>
-                    </p:column>
-                    
-                    <p:column headerText="Nombres">
-                        <p:outputLabel value="#{venta.nombresPersona}"/>
-                    </p:column>
-                    
-                    <p:column headerText="Apellidos">
-                        <p:outputLabel value="#{venta.apellidosPersona}"/>
-                    </p:column>
-                    
-                    <p:column headerText="Contacto">
-                        <p:outputLabel value="#{venta.numCelularPersona}"/>
-                    </p:column>
+                        <p:column headerText="Número documento">
+                            <p:outputLabel value="#{venta.numDocumentoPersona}"/>
+                        </p:column>
 
-                    <p:column headerText="Monto">
-                        <p:outputLabel value="#{venta.monto}">
-                            <f:convertNumber type="currency" currencySymbol="$/. " minFractionDigits="2"/>
-                        </p:outputLabel>
-                    </p:column>
-                    
-                    
-                    <p:column headerText="Detalles">
-                        <p:commandLink value="Ver detalle" actionListener="#{detalleVentaBean}"/>
-                    </p:column>
-                </p:dataTable>
+                        <p:column headerText="Nombres">
+                            <p:outputLabel value="#{venta.nombresPersona}"/>
+                        </p:column>
+
+                        <p:column headerText="Apellidos">
+                            <p:outputLabel value="#{venta.apellidosPersona}"/>
+                        </p:column>
+
+                        <p:column headerText="Contacto">
+                            <p:outputLabel value="#{venta.numCelularPersona}"/>
+                        </p:column>
+
+                        <p:column headerText="Monto">
+                            <p:outputLabel value="#{venta.monto}">
+                                <f:convertNumber type="currency" currencySymbol="$/. " minFractionDigits="2"/>
+                            </p:outputLabel>
+                        </p:column>
+
+
+                        <p:column headerText="Detalles">
+                            <p:commandLink value="Ver detalle" action="#{ventaBean.cargarDetalles(venta)}" update=":form:dlgDetalles" oncomplete="PF('wdlgDetalles').show()" />
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:dialog header="Detalles" widgetVar="wdlgDetalles" id="dlgDetalles" resizable="false" modal="true" width="900">
+                        <p:dataTable id="detalles" value="#{ventaBean.lstDetalles}" var="detalle" style="width:200%">
+                            <p:column headerText="ID Producto">
+                                <p:outputLabel value="#{detalle.idProducto.id}" />
+                            </p:column>
+                            <p:column headerText="Producto">
+                                <p:outputLabel value="#{detalle.nombreProducto}" />
+                            </p:column>
+                            <p:column headerText="Cantidad">
+                                <p:outputLabel value="#{detalle.cantidad}" />
+                            </p:column>
+                            <p:column headerText="Precio x Producto">
+                                <p:outputLabel value="#{detalle.precioProducto}">
+                                    <f:convertNumber type="currency" currencySymbol="$/. " minFractionDigits="2" />
+                                </p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Monto x Producto">
+                                <p:outputLabel value="#{detalle.montoProducto}">
+                                    <f:convertNumber type="currency" currencySymbol="$/. " minFractionDigits="2" />
+                                </p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Fecha/Hora">
+                                <p:outputLabel value="#{detalle.fechaHora}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                                </p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Nombre Completo">
+                                <p:outputLabel value="#{detalle.fullName}" />
+                            </p:column>
+                            <p:column headerText="Número Documento">
+                                <p:outputLabel value="#{detalle.numDoc}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:dialog>
+                </h:form>
             </ui:define>
 
         </ui:composition>

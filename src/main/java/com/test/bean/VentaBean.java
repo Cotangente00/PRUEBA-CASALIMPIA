@@ -4,6 +4,7 @@
  */
 package com.test.bean;
 
+import com.test.productcontrol.DetalleVentaRegister;
 import com.test.productcontrol.VentaRegister;
 import com.test.productcontrol.model.DetalleVenta;
 import com.test.productcontrol.model.Producto;
@@ -27,6 +28,26 @@ public class VentaBean {
     private int cantidad;
     private List<DetalleVenta> lista = new ArrayList();
     private List<Venta> lstVentas;
+    private Venta ventaSeleccionada;
+    private List<DetalleVenta> lstDetalles;
+    
+    public Venta getVentaSeleccionada() {
+        return ventaSeleccionada;
+    }
+
+    public void setVentaSeleccionada(Venta ventaSeleccionada) {
+        this.ventaSeleccionada = ventaSeleccionada;
+    }
+
+    public List<DetalleVenta> getLstDetalles() {
+        return lstDetalles;
+    }
+
+    public void setLstDetalles(List<DetalleVenta> lstDetalles) {
+        this.lstDetalles = lstDetalles;
+    }
+    
+    
 
     public List<DetalleVenta> getLista() {
         return lista;
@@ -137,12 +158,23 @@ public class VentaBean {
     }
     
     public void eliminar(DetalleVenta detalle) {
-    try {
-        lista.remove(detalle);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto eliminado correctamente."));
-    } catch (Exception e) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aviso", "Error al eliminar el producto."));
+        try {
+            lista.remove(detalle);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto eliminado correctamente."));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aviso", "Error al eliminar el producto."));
+        }
     }
-}
+    
+    // Método para cargar detalles de una venta en específico
+    public void cargarDetalles(Venta venta) {
+        DetalleVentaRegister detalleRegister = new DetalleVentaRegister();
+        try {
+            this.ventaSeleccionada = venta;
+            this.lstDetalles = detalleRegister.listarPorVenta(venta.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
