@@ -43,10 +43,12 @@ public class VentaRegister extends connection{
             
             
             for (DetalleVenta det: lista){
-                try (PreparedStatement st3 = this.getCn().prepareStatement("INSERT INTO DetalleVenta (idVenta, idProducto, cantidad) values (?,?,?)")) {
+                try (PreparedStatement st3 = this.getCn().prepareStatement("INSERT INTO DetalleVenta (idVenta, idProducto, nombreProducto, cantidad, precioProducto) values (?,?,?,?,?)")) {
                     st3.setInt(1, idVenta);
                     st3.setInt(2, det.getIdProducto().getId());
-                    st3.setInt(3, det.getCantidad());
+                    st3.setString(3, det.getIdProducto().getNombre());
+                    st3.setInt(4, det.getCantidad());
+                    st3.setDouble(5, det.getIdProducto().getPrecio());
                     st3.executeUpdate();
                 }
             }
