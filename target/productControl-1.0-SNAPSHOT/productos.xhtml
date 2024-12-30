@@ -25,15 +25,15 @@
                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
                                 rowsPerPageTemplate="5,10,15">
-                        <p:column headerText="ID">
+                        <p:column headerText="ID" sortBy="#{producto.id}">
                             <p:outputLabel value="#{producto.id}"/>
                         </p:column>
 
-                        <p:column headerText="Nombre">
+                        <p:column headerText="Nombre" sortBy="#{producto.nombre}">
                             <p:outputLabel value="#{producto.nombre}"/>
                         </p:column>
 
-                        <p:column headerText="Precio">
+                        <p:column headerText="Precio" sortBy="#{producto.precio}">
                             <p:outputLabel value="#{producto.precio}">
                                 <f:convertNumber type="currency" currencySymbol="$/. " minFractionDigits="2"/>
                             </p:outputLabel>
