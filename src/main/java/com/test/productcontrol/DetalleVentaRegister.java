@@ -31,7 +31,8 @@ public class DetalleVentaRegister extends connection {
             while (rs.next()) {
                 DetalleVenta detalle = new DetalleVenta();
                 detalle.setId(rs.getInt("id"));
-                //detalle.setIdProducto(new Producto(rs.getInt("idProducto"))); 
+                detalle.setIdProducto(new Producto());
+                detalle.getIdProducto().setId(rs.getInt("idProducto")); 
                 detalle.setNombreProducto(rs.getString("nombreProducto"));
                 detalle.setCantidad(rs.getInt("cantidad"));
                 detalle.setPrecioProducto(rs.getDouble("precioProducto"));

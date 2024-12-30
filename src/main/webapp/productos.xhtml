@@ -18,18 +18,22 @@
                 <p:growl id="msj" autoUpdate="true" showDetail="true"/>
                 <h:form id="frm">
 
-                    <p:commandButton value="Nuevo" oncomplete="PF('wdlgDatos').show();" actionListener="#{productoBean.setAccion('Registrar')}" update=":dlgDatos"/>
+                    <p:commandButton value="Registrar nuevo producto" oncomplete="PF('wdlgDatos').show();" actionListener="#{productoBean.setAccion('Registrar')}" update=":dlgDatos"/>
 
-                    <p:dataTable id="data" value="#{productoBean.lstProductos}" var="producto">
-                        <p:column headerText="ID">
+                    <p:dataTable id="data" value="#{productoBean.lstProductos}" var="producto" paginator="true"
+                                paginatorPosition="both"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                rowsPerPageTemplate="5,10,15">
+                        <p:column headerText="ID" sortBy="#{producto.id}">
                             <p:outputLabel value="#{producto.id}"/>
                         </p:column>
 
-                        <p:column headerText="Nombre">
+                        <p:column headerText="Nombre" sortBy="#{producto.nombre}">
                             <p:outputLabel value="#{producto.nombre}"/>
                         </p:column>
 
-                        <p:column headerText="Precio">
+                        <p:column headerText="Precio" sortBy="#{producto.precio}">
                             <p:outputLabel value="#{producto.precio}">
                                 <f:convertNumber type="currency" currencySymbol="$/. " minFractionDigits="2"/>
                             </p:outputLabel>

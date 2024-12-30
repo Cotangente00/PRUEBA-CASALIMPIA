@@ -13,32 +13,36 @@
             <ui:define name="content">
                 <f:event type="preRenderView" listener="#{ventaBean.listar('F')}" />
                 <h:form id="form">
-                    <p:dataTable id="data" value="#{ventaBean.lstVentas}" var="venta">
-                        <p:column headerText="ID-Venta">
+                    <p:dataTable id="data" value="#{ventaBean.lstVentas}" var="venta" paginator="true"
+                                paginatorPosition="both"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                rowsPerPageTemplate="5,10,15">
+                        <p:column headerText="ID-Venta" sortBy="#{venta.id}">
                             <p:outputLabel value="#{venta.id}"/>
                         </p:column>
 
-                        <p:column headerText="Fecha">
+                        <p:column headerText="Fecha" sortBy="#{venta.fecha}">
                             <p:outputLabel value="#{venta.fecha}"/>
                         </p:column>
 
-                        <p:column headerText="Número documento">
+                        <p:column headerText="Número documento" sortBy="#{venta.numDocumentoPersona}">
                             <p:outputLabel value="#{venta.numDocumentoPersona}"/>
                         </p:column>
 
-                        <p:column headerText="Nombres">
+                        <p:column headerText="Nombres" sortBy="#{venta.nombresPersona}">
                             <p:outputLabel value="#{venta.nombresPersona}"/>
                         </p:column>
 
-                        <p:column headerText="Apellidos">
+                        <p:column headerText="Apellidos" sortBy="#{venta.apellidosPersona}">
                             <p:outputLabel value="#{venta.apellidosPersona}"/>
                         </p:column>
 
-                        <p:column headerText="Contacto">
+                        <p:column headerText="Contacto" sortBy="#{venta.numCelularPersona}">
                             <p:outputLabel value="#{venta.numCelularPersona}"/>
                         </p:column>
 
-                        <p:column headerText="Monto">
+                        <p:column headerText="Monto" sortBy="#{venta.monto}">
                             <p:outputLabel value="#{venta.monto}">
                                 <f:convertNumber type="currency" currencySymbol="$/. " minFractionDigits="2"/>
                             </p:outputLabel>
@@ -52,6 +56,9 @@
 
                     <p:dialog header="Detalles de la Venta - Cliente: #{ventaBean.ventaSeleccionada.nombresPersona} #{ventaBean.ventaSeleccionada.apellidosPersona} | Documento: #{ventaBean.ventaSeleccionada.numDocumentoPersona}" widgetVar="wdlgDetalles" id="dlgDetalles" resizable="false" modal="true" width="900">
                         <p:dataTable id="detalles" value="#{ventaBean.lstDetalles}" var="detalle" style="width:100%">
+                            <p:column headerText="ID Producto">
+                                <p:outputLabel value="#{detalle.idProducto.id}" />
+                            </p:column> 
                             <p:column headerText="Producto">
                                 <p:outputLabel value="#{detalle.nombreProducto}" />
                             </p:column> 
