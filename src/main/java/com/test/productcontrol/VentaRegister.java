@@ -34,21 +34,25 @@ public class VentaRegister extends connection{
             
             PreparedStatement st2 = this.getCn().prepareStatement("SELECT LAST_INSERT_ID() FROM Venta limit 1");
             ResultSet rs;
-            int idVenta = 0;
+            int idVenta1 = 0;
             rs = st2.executeQuery();
             while(rs.next()){
-                idVenta = rs.getInt(1);
+                idVenta1 = rs.getInt(1);
             }
             rs.close();
             
             
             for (DetalleVenta det: lista){
-                try (PreparedStatement st3 = this.getCn().prepareStatement("INSERT INTO DetalleVenta (idVenta, idProducto, nombreProducto, cantidad, precioProducto) values (?,?,?,?,?)")) {
-                    st3.setInt(1, idVenta);
+                try (PreparedStatement st3 = this.getCn().prepareStatement("INSERT INTO DetalleVenta (idVenta, idProducto, nombreProducto, cantidad, precioProducto, montoProducto, fechaHora, fullName, numDoc) values (?,?,?,?,?,?,?,?,?)")) {
+                    st3.setInt(1, idVenta1);
                     st3.setInt(2, det.getIdProducto().getId());
                     st3.setString(3, det.getIdProducto().getNombre());
                     st3.setInt(4, det.getCantidad());
                     st3.setDouble(5, det.getIdProducto().getPrecio());
+                    st3.setDouble(6, det.getCantidad() * det.getIdProducto().getPrecio());
+                    st3.setDate(7, venta.getFecha());
+                    st3.setString(8, venta.getPersona().getNombres() + " " + venta.getPersona().getApellidos());
+                    st3.setLong(9, venta.getPersona().getNumDocumento());
                     st3.executeUpdate();
                 }
             }

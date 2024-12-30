@@ -75,10 +75,19 @@ public class VentaBean {
     }
     
     public void agregar(){
+        
+        if (venta.getPersona() == null || producto == null || cantidad <= 0) {
+            FacesContext.getCurrentInstance().addMessage(null, 
+                new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "Debe seleccionar una persona, un producto y una cantidad válida."));
+            return;
+        }
         DetalleVenta det = new DetalleVenta();
         det.setCantidad(cantidad);
         det.setIdProducto(producto);
         this.lista.add(det);
+        
+        cantidad = 0;
+        producto = null;
     }
     
     public void registrar() throws Exception{
