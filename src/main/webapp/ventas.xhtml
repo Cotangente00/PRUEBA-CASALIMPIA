@@ -51,6 +51,10 @@
                         <p:column headerText="Cantidad">
                             #{det.cantidad}
                         </p:column>
+                        
+                        <p:column headerText="Acciones">
+                            <p:commandLink value="Eliminar" actionListener="#{ventaBean.eliminar(det)}" update="detalle"/>
+                        </p:column>
                     </p:dataTable>
                     <p:commandButton value="Registrar" actionListener="#{ventaBean.registrar()}" action="ventas?faces-redirect=true"/>
                 </h:form>

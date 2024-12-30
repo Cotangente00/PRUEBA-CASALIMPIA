@@ -120,4 +120,14 @@ public class VentaBean {
             throw e;
         }
     }
+    
+    public void eliminar(DetalleVenta detalle) {
+    try {
+        lista.remove(detalle);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto eliminado correctamente."));
+    } catch (Exception e) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aviso", "Error al eliminar el producto."));
+    }
+}
+
 }
