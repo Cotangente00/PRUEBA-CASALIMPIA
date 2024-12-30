@@ -107,6 +107,7 @@ public class ProductoBean {
         }
     }
     
+    //Método para listar los productos únicamente cuando tiene el estado = 1, es decir "Activos "
     public void listar(String valor)throws Exception{
         ProductoRegister registro;
         
@@ -114,11 +115,31 @@ public class ProductoBean {
             if(valor.contains("F")){
                 if(isPostBack() == false){
                     registro = new ProductoRegister();
-                    lstProductos = registro.listar();
+                    lstProductos = registro.listarActivos();
                 }   
             } else {
                 registro = new ProductoRegister();
-                lstProductos = registro.listar();
+                lstProductos = registro.listarActivos();
+            }
+            
+        }catch (Exception e){
+            throw e;
+        }
+    }
+    
+    //Método para listar los productos únicamente cuando tiene el estado = 2, es decir Desactivados
+    public void listarInactivos(String valor)throws Exception{
+        ProductoRegister registro;
+        
+        try{
+            if(valor.contains("F")){
+                if(isPostBack() == false){
+                    registro = new ProductoRegister();
+                    lstProductos = registro.listarInactivos();
+                }   
+            } else {
+                registro = new ProductoRegister();
+                lstProductos = registro.listarInactivos();
             }
             
         }catch (Exception e){
@@ -154,4 +175,15 @@ public class ProductoBean {
         }
     }
     
+    //método para desactivar producto
+    public void desactivar(Producto per) throws Exception {
+        ProductoRegister registro;
+        try {
+            registro = new ProductoRegister();
+            registro.desactivar(per); 
+            this.listar("V"); 
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }
