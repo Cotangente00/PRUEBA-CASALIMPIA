@@ -186,4 +186,16 @@ public class ProductoBean {
             throw e;
         }
     }
+    
+    //método para desactivar producto
+    public void activar(Producto per) throws Exception {
+        ProductoRegister registro;
+        try {
+            registro = new ProductoRegister();
+            registro.activar(per); 
+            this.listar("V"); 
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }

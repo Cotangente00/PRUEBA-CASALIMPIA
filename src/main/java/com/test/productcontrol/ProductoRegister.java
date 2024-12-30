@@ -128,7 +128,7 @@ public class ProductoRegister extends connection{
         return lista;
     }
     
-    //listar productos únicamente cuando el estado es igual a 2
+    //sentencia para consultar los productos únicamente cuando el estado es igual a 2
     public List<Producto> listarInactivos() throws Exception {
         List<Producto> lista;
         ResultSet rs;
@@ -153,7 +153,7 @@ public class ProductoRegister extends connection{
         return lista;
     }
     
-    //consulta para desactivar productos cambiando su estado a 2
+    //sentencia para desactivar productos cambiando su estado a 2
     public void desactivar(Producto pro) throws Exception {
         try {
             this.connect();
@@ -167,5 +167,17 @@ public class ProductoRegister extends connection{
         }
     }
 
-    
+    //sentencia para activar productos devolviendo su estado a 1
+    public void activar(Producto pro) throws Exception {
+        try {
+            this.connect();
+            PreparedStatement st = this.getCn().prepareStatement("UPDATE Producto SET estado = 1 WHERE id = ?");
+            st.setInt(1, pro.getId());
+            st.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.close();
+        }
+    }
 }
