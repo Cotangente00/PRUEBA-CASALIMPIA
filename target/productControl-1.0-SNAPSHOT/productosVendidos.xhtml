@@ -52,6 +52,9 @@
 
                     <p:dialog header="Detalles de la Venta - Cliente: #{ventaBean.ventaSeleccionada.nombresPersona} #{ventaBean.ventaSeleccionada.apellidosPersona} | Documento: #{ventaBean.ventaSeleccionada.numDocumentoPersona}" widgetVar="wdlgDetalles" id="dlgDetalles" resizable="false" modal="true" width="900">
                         <p:dataTable id="detalles" value="#{ventaBean.lstDetalles}" var="detalle" style="width:100%">
+                            <p:column headerText="ID Producto">
+                                <p:outputLabel value="#{detalle.idProducto.id}" />
+                            </p:column> 
                             <p:column headerText="Producto">
                                 <p:outputLabel value="#{detalle.nombreProducto}" />
                             </p:column> 
