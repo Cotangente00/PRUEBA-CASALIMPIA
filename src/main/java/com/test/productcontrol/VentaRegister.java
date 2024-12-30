@@ -20,10 +20,14 @@ public class VentaRegister extends connection{
         try{
             this.connect();
             this.getCn().setAutoCommit(false);
-            try (PreparedStatement st = this.getCn().prepareStatement("INSERT INTO Venta (fecha, idPersona, monto) values (?,?,?)")) {
+            try (PreparedStatement st = this.getCn().prepareStatement("INSERT INTO Venta (fecha, idPersona, nombresPersona, apellidosPersona, numDocumentoPersona, numCelularPersona, monto) values (?,?,?,?,?,?,?)")) {
                 st.setDate(1, venta.getFecha());
                 st.setInt(2, venta.getPersona().getId());
-                st.setDouble(3, venta.getMonto());
+                st.setString(3, venta.getPersona().getNombres());
+                st.setString(4, venta.getPersona().getApellidos());
+                st.setLong(5, venta.getPersona().getNumDocumento());
+                st.setLong(6, venta.getPersona().getNumCelular());
+                st.setDouble(7, venta.getMonto());
                 st.executeUpdate();
             }
             
@@ -60,14 +64,17 @@ public class VentaRegister extends connection{
         ResultSet rs;
         try{
             this.connect();
-            PreparedStatement st = this.getCn().prepareCall("SELECT id, fecha, idPersona, monto FROM Venta");
+            PreparedStatement st = this.getCn().prepareCall("SELECT id, fecha, numDocumentoPersona, nombresPersona, apellidosPersona, numCelularPersona, monto FROM Venta");
             rs = st.executeQuery();
             lista = new ArrayList();
             while(rs.next()){
                 Venta venta = new Venta();
                 venta.setId(rs.getInt("id"));
                 venta.setFecha(rs.getDate("fecha"));
-                venta.setIdPersona(rs.getInt("idPersona"));
+                venta.setNumDocumentoPersona(rs.getLong("numDocumentoPersona"));
+                venta.setNombresPersona(rs.getString("nombresPersona"));
+                venta.setApellidosPersona(rs.getString("ApellidosPersona"));
+                venta.setNumCelularPersona(rs.getLong("numCelularPersona"));
                 venta.setMonto(rs.getDouble("monto"));
                 lista.add(venta);
             }
