@@ -95,6 +95,12 @@ public class VentaBean {
         double monto = 0;
         try{
             
+            if (venta.getPersona() == null || lista.isEmpty() ){
+                FacesContext.getCurrentInstance().addMessage(null, 
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "Debe ingresar todos los datos necesarios."));
+                return;
+            }
+            
             for(DetalleVenta det: lista){
                 monto += det.getIdProducto().getPrecio() * det.getCantidad();
             }

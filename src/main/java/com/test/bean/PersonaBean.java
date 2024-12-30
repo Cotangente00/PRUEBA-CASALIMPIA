@@ -7,6 +7,7 @@ package com.test.bean;
 import com.test.productcontrol.PersonaRegister;
 import com.test.productcontrol.model.Persona;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -80,6 +81,12 @@ public class PersonaBean {
         PersonaRegister registro;
         
         try{
+            if (persona.getNombres() == null || persona.getApellidos() == null || persona.getSexo() == null || persona.getNumCelular() <= 0 || persona.getNumDocumento() <= 0) {
+                FacesContext.getCurrentInstance().addMessage(null, 
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "Debe ingresar todos los datos necesarios."));
+                return;
+            }
+            
             registro = new PersonaRegister();
             registro.register(persona);
             this.listar("V");

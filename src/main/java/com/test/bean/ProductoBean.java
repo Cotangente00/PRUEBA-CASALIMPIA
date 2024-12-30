@@ -7,6 +7,7 @@ package com.test.bean;
 import com.test.productcontrol.ProductoRegister;
 import com.test.productcontrol.model.Producto;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -79,6 +80,13 @@ public class ProductoBean {
         ProductoRegister registro;
         
         try{
+            
+            if (producto.getNombre() == null || producto.getPrecio() <= 0) {
+                FacesContext.getCurrentInstance().addMessage(null, 
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "Debe ingresar todos los datos necesarios."));
+                return;
+            }
+            
             registro = new ProductoRegister();
             registro.register(producto);
             this.listar("V");
