@@ -30,7 +30,7 @@
                         </p:column>
 
                         <p:column headerText="Activar">
-                            <p:commandLink value="Activar" actionListener="#{productoBean.activar(producto)}" update="data"/>
+                            <p:commandLink value="Activar" actionListener="#{productoBean.activar(producto)}" update="data" action="productosInactivos?faces-redirect=true"/>
                         </p:column>
 
                         <p:column headerText="Eliminar">

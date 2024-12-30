@@ -5,6 +5,7 @@
 package com.test.productcontrol;
 
 import com.test.productcontrol.model.DetalleVenta;
+import com.test.productcontrol.model.Producto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class DetalleVentaRegister extends connection {
             while (rs.next()) {
                 DetalleVenta detalle = new DetalleVenta();
                 detalle.setId(rs.getInt("id"));
-                //detalle.setIdProducto(new Producto(rs.getInt("idProducto"))); // Crea el objeto Producto según sea necesario
+                //detalle.setIdProducto(new Producto(rs.getInt("idProducto"))); 
                 detalle.setNombreProducto(rs.getString("nombreProducto"));
                 detalle.setCantidad(rs.getInt("cantidad"));
                 detalle.setPrecioProducto(rs.getDouble("precioProducto"));
