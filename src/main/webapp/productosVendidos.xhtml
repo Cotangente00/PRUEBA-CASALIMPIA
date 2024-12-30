@@ -50,7 +50,7 @@
                         </p:column>
                     </p:dataTable>
 
-                    <p:dialog header="Detalles" widgetVar="wdlgDetalles" id="dlgDetalles" resizable="false" modal="true" width="900">
+                    <p:dialog header="Detalles de la Venta - Cliente: #{ventaBean.ventaSeleccionada.nombresPersona} #{ventaBean.ventaSeleccionada.apellidosPersona} | Documento: #{ventaBean.ventaSeleccionada.numDocumentoPersona}" widgetVar="wdlgDetalles" id="dlgDetalles" resizable="false" modal="true" width="900">
                         <p:dataTable id="detalles" value="#{ventaBean.lstDetalles}" var="detalle" style="width:200%">
                             <p:column headerText="Producto">
                                 <p:outputLabel value="#{detalle.nombreProducto}" />
@@ -72,12 +72,6 @@
                                 <p:outputLabel value="#{detalle.fechaHora}">
                                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                                 </p:outputLabel>
-                            </p:column>
-                            <p:column headerText="Nombre Completo">
-                                <p:outputLabel value="#{detalle.fullName}" />
-                            </p:column>
-                            <p:column headerText="Número Documento">
-                                <p:outputLabel value="#{detalle.numDoc}" />
                             </p:column>
                         </p:dataTable>
                     </p:dialog>
