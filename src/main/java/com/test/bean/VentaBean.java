@@ -26,6 +26,7 @@ public class VentaBean {
     private Producto producto = new Producto();
     private int cantidad;
     private List<DetalleVenta> lista = new ArrayList();
+    private List<Venta> lstVentas;
 
     public List<DetalleVenta> getLista() {
         return lista;
@@ -34,7 +35,14 @@ public class VentaBean {
     public void setLista(List<DetalleVenta> lista) {
         this.lista = lista;
     }
-    
+
+    public List<Venta> getLstVentas() {
+        return lstVentas;
+    }
+
+    public void setLstVentas(List<Venta> lstVentas) {
+        this.lstVentas = lstVentas;
+    }
 
     public int getCantidad() {
         return cantidad;
@@ -58,6 +66,12 @@ public class VentaBean {
 
     public void setVenta(Venta venta) {
         this.venta = venta;
+    }
+    
+    private boolean isPostBack (){
+        boolean reply;
+        reply = FacesContext.getCurrentInstance().isPostback();
+        return reply;
     }
     
     public void agregar(){
@@ -85,6 +99,25 @@ public class VentaBean {
             throw e;
         } finally {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+        }
+    }
+    
+    public void listar(String valor)throws Exception{
+        VentaRegister registro;
+        
+        try{
+            if(valor.contains("F")){
+                if(isPostBack() == false){
+                    registro = new VentaRegister();
+                    lstVentas = registro.listar();
+                }   
+            } else {
+                registro = new VentaRegister();
+                lstVentas = registro.listar();
+            }
+            
+        }catch (Exception e){
+            throw e;
         }
     }
 }

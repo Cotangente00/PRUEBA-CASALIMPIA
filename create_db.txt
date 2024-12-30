@@ -1,6 +1,6 @@
 CREATE TABLE detalleVenta(
-	id int primary key not null auto_increment,
-  	idVenta int(11),
+    id int primary key not null auto_increment,
+    idVenta int(11),
     idProducto int(11),
     cantidad tinyint(4)
 );
@@ -25,4 +25,10 @@ CREATE TABLE venta(
     fecha timestamp,
     idPersona tinyint(4),
     monto decimal(7.2)
+);
+
+CREATE TABLE productosInactivos(
+    id int primary key not null auto_increment,
+    nombre varchar(200),
+    precio decimal(7.2)
 );

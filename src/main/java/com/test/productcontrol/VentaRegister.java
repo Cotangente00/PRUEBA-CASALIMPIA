@@ -8,6 +8,7 @@ import com.test.productcontrol.model.DetalleVenta;
 import com.test.productcontrol.model.Venta;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,4 +54,29 @@ public class VentaRegister extends connection{
             this.close();
         }
     }
+    
+    public List<Venta> listar()throws Exception {
+        List<Venta> lista;
+        ResultSet rs;
+        try{
+            this.connect();
+            PreparedStatement st = this.getCn().prepareCall("SELECT id, fecha, idPersona, monto FROM Venta");
+            rs = st.executeQuery();
+            lista = new ArrayList();
+            while(rs.next()){
+                Venta venta = new Venta();
+                venta.setId(rs.getInt("id"));
+                venta.setFecha(rs.getDate("fecha"));
+                venta.setIdPersona(rs.getInt("idPersona"));
+                venta.setMonto(rs.getDouble("monto"));
+                lista.add(venta);
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            this.close();
+        }
+        return lista;
+    }
+    
 }

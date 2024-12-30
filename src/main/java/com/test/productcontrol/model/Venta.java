@@ -15,6 +15,29 @@ public class Venta {
     private Date fecha;
     private Persona persona;
     private double monto;
+    private int idPersona;
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Venta other = (Venta) obj;
+        return this.id == other.id;
+    }
 
     public int getId() {
         return id;
@@ -46,5 +69,13 @@ public class Venta {
 
     public void setMonto(double monto) {
         this.monto = monto;
+    }
+
+    public int getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(int idPersona) {
+        this.idPersona = idPersona;
     }
 }
