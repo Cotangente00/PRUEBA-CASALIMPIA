@@ -7,6 +7,7 @@ package com.test.bean;
 import com.test.productcontrol.ProductoRegister;
 import com.test.productcontrol.model.Producto;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -79,6 +80,13 @@ public class ProductoBean {
         ProductoRegister registro;
         
         try{
+            
+            if (producto.getNombre() == null || producto.getPrecio() <= 0) {
+                FacesContext.getCurrentInstance().addMessage(null, 
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "Debe ingresar todos los datos necesarios."));
+                return;
+            }
+            
             registro = new ProductoRegister();
             registro.register(producto);
             this.listar("V");
@@ -99,6 +107,7 @@ public class ProductoBean {
         }
     }
     
+    //Método para listar los productos únicamente cuando tiene el estado = 1, es decir "Activos "
     public void listar(String valor)throws Exception{
         ProductoRegister registro;
         
@@ -106,11 +115,31 @@ public class ProductoBean {
             if(valor.contains("F")){
                 if(isPostBack() == false){
                     registro = new ProductoRegister();
-                    lstProductos = registro.listar();
+                    lstProductos = registro.listarActivos();
                 }   
             } else {
                 registro = new ProductoRegister();
-                lstProductos = registro.listar();
+                lstProductos = registro.listarActivos();
+            }
+            
+        }catch (Exception e){
+            throw e;
+        }
+    }
+    
+    //Método para listar los productos únicamente cuando tiene el estado = 2, es decir Desactivados
+    public void listarInactivos(String valor)throws Exception{
+        ProductoRegister registro;
+        
+        try{
+            if(valor.contains("F")){
+                if(isPostBack() == false){
+                    registro = new ProductoRegister();
+                    lstProductos = registro.listarInactivos();
+                }   
+            } else {
+                registro = new ProductoRegister();
+                lstProductos = registro.listarInactivos();
             }
             
         }catch (Exception e){
@@ -146,4 +175,27 @@ public class ProductoBean {
         }
     }
     
+    //método para desactivar producto
+    public void desactivar(Producto per) throws Exception {
+        ProductoRegister registro;
+        try {
+            registro = new ProductoRegister();
+            registro.desactivar(per); 
+            this.listar("V"); 
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    //método para desactivar producto
+    public void activar(Producto per) throws Exception {
+        ProductoRegister registro;
+        try {
+            registro = new ProductoRegister();
+            registro.activar(per); 
+            this.listar("V"); 
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }

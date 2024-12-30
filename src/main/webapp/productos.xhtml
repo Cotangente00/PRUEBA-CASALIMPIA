@@ -15,47 +15,51 @@
 
             <ui:define name="content">
                 <f:event type="preRenderView" listener="#{productoBean.listar('F')}" />
-                <p:growl id="msj" showDetail="true"/>
-                    <h:form id="frm">
+                <p:growl id="msj" autoUpdate="true" showDetail="true"/>
+                <h:form id="frm">
 
-                        <p:commandButton value="Nuevo" oncomplete="PF('wdlgDatos').show();" actionListener="#{productoBean.setAccion('Registrar')}" update=":dlgDatos"/>
+                    <p:commandButton value="Nuevo" oncomplete="PF('wdlgDatos').show();" actionListener="#{productoBean.setAccion('Registrar')}" update=":dlgDatos"/>
 
-                        <p:dataTable id="data" value="#{productoBean.lstProductos}" var="producto">
-                            <p:column headerText="ID">
-                                <p:outputLabel value="#{producto.id}"/>
-                            </p:column>
+                    <p:dataTable id="data" value="#{productoBean.lstProductos}" var="producto">
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{producto.id}"/>
+                        </p:column>
 
-                            <p:column headerText="Nombre">
-                                <p:outputLabel value="#{producto.nombre}"/>
-                            </p:column>
+                        <p:column headerText="Nombre">
+                            <p:outputLabel value="#{producto.nombre}"/>
+                        </p:column>
 
-                            <p:column headerText="Precio">
-                                <p:outputLabel value="#{producto.precio}">
-                                    <f:convertNumber type="currency" currencySymbol="$/. " minFractionDigits="2"/>
-                                </p:outputLabel>
-                            </p:column>
+                        <p:column headerText="Precio">
+                            <p:outputLabel value="#{producto.precio}">
+                                <f:convertNumber type="currency" currencySymbol="$/. " minFractionDigits="2"/>
+                            </p:outputLabel>
+                        </p:column>
 
-                            <p:column headerText="Editar">
-                                <p:commandLink value="Modificar" actionListener="#{productoBean.readID(producto)}" oncomplete="PF('wdlgDatos').show();" update=":dlgDatos"/>
-                            </p:column>
+                        <p:column headerText="Editar">
+                            <p:commandLink value="Modificar" actionListener="#{productoBean.readID(producto)}" oncomplete="PF('wdlgDatos').show();" update=":dlgDatos"/>
+                        </p:column>
 
-                            <p:column headerText="Eliminar">
-                                <p:commandLink value="Eliminar" actionListener="#{productoBean.eliminar(producto)}" update="data"/>
-                            </p:column>
-                        </p:dataTable>
+                        <p:column headerText="Desactivar">
+                            <p:commandLink value="Desactivar" actionListener="#{productoBean.desactivar(producto)}" update="data"/>
+                        </p:column>
+
+                        <p:column headerText="Eliminar">
+                            <p:commandLink value="Eliminar" actionListener="#{productoBean.eliminar(producto)}" update="data"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+
+                <p:dialog header="Datos" widgetVar="wdlgDatos" id="dlgDatos">
+                    <h:form>
+                        <p:outputLabel value="Nombre"/>
+                        <p:inputText value="#{productoBean.producto.nombre}"/>
+                        <p:outputLabel value="Precio"/>
+                        <p:inputText value="#{productoBean.producto.precio}"/>
+
+                        <p:commandButton value="#{productoBean.accion}" actionListener="#{productoBean.operar()}" oncomplete="PF('wdlgDatos').hide();" update=":frm:data"/>
+                        <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('wdlgDatos').hide();"/>
                     </h:form>
-
-                    <p:dialog header="Datos" widgetVar="wdlgDatos" id="dlgDatos">
-                        <h:form>
-                            <p:outputLabel value="Nombre"/>
-                            <p:inputText value="#{productoBean.producto.nombre}"/>
-                            <p:outputLabel value="Precio"/>
-                            <p:inputText value="#{productoBean.producto.precio}"/>
-
-                            <p:commandButton value="#{productoBean.accion}" actionListener="#{productoBean.operar()}" oncomplete="PF('wdlgDatos').hide();" update=":frm:data"/>
-                            <p:commandButton value="Cancelar" immediate="true" oncomplete="PF('wdlgDatos').hide();"/>
-                        </h:form>
-                    </p:dialog>
+                </p:dialog> 
             </ui:define>
 
         </ui:composition>
